@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
+                'id'=> 1,
                 'name' => "David",
                 'surname' => "Soto",
                 'nickname' => "s0usa",
@@ -24,6 +25,7 @@ class UserSeeder extends Seeder
                 'role_id' => 1
             ],
             [
+                'id' => 2,
                 'name' => "Sergio",
                 'surname' => "Soto",
                 'nickname' => "Sergii",
@@ -33,6 +35,7 @@ class UserSeeder extends Seeder
                 'role_id' => 2
             ],
             [
+                'id' => 3,
                 'name' => "David",
                 'surname' => "Blanco",
                 'nickname' => "Dablaan",
@@ -42,6 +45,7 @@ class UserSeeder extends Seeder
                 'role_id' => 2
             ],
             [
+                'id' => 4,
                 'name' => "Alejandro",
                 'surname' => "Laguia",
                 'nickname' => "Dreck",

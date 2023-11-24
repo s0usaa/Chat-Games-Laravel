@@ -11,7 +11,7 @@ class GameSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run()
+    public function run(): void
     {
         DB::table('games')->insert([
             [
