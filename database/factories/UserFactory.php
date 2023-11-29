@@ -22,10 +22,14 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'surname' => fake(),
+            'surname' => fake()->lastName(),
             'nickname' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'password' =>(encrypt('123456')),
+            'email_verified_at' => now(),
+            'password' => encrypt('123456'),
+            'birth_date' => fake()->date(),
+            'role_id' => 2,
+            'remember_token' => Str::random(10),
         ];
     }
 

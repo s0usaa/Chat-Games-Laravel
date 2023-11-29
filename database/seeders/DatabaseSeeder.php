@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UserSeeder::class,
-            GameSeeder::class,
             PartySeeder::class,
+            GameSeeder::class,
         ]);
         \App\Models\User::factory(10)->create();
-        \App\Models\Message::factory(40)->create();
+        \App\Models\Message::factory(10)->create();
     }
 }
