@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
                 'surname' => "Soto",
                 'nickname' => "s0usa",
                 'email' => "david@david.com",
-                'password' => "123456",
+                'password' => encrypt("123456"),
                 'birth_date' => "1986-07-24",
                 'role_id' => 1
             ],
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                 'surname' => "Soto",
                 'nickname' => "Sergii",
                 'email' => "sergio@sergio.com",
-                'password' => "123456",
+                'password' => encrypt("123456"),
                 'birth_date' => "1988-04-05",
                 'role_id' => 2
             ],
@@ -40,7 +40,7 @@ class UserSeeder extends Seeder
                 'surname' => "Blanco",
                 'nickname' => "Dablaan",
                 'email' => "blanco@blanco.com",
-                'password' => "123456",
+                'password' => encrypt("123456"),
                 'birth_date' => "1982-06-22",
                 'role_id' => 2
             ],
@@ -50,7 +50,7 @@ class UserSeeder extends Seeder
                 'surname' => "Laguia",
                 'nickname' => "Dreck",
                 'email' => "alejandro@alejandro.com",
-                'password' => "123456",
+                'password' => encrypt("123456"),
                 'birth_date' => "1986-07-30",
                 'role_id' => 2
             ],

@@ -22,10 +22,10 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'surname' => fake()->surname(),
-            'nickname' => fake()->nickname()->unique(),
-            'role_id' => fake()->role_id(2),
-            'birth_date' => fake()->birth_date(),
+            'surname' => fake(),
+            'nickname' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'password' =>(encrypt('123456')),
         ];
     }
 

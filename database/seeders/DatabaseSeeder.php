@@ -21,15 +21,11 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             RoleSeeder::class,
-        ]);
-        $this->call([
             UserSeeder::class,
-        ]);
-        $this->call([
             GameSeeder::class,
-        ]);
-        $this->call([
             PartySeeder::class,
         ]);
+        \App\Models\User::factory(10)->create();
+        \App\Models\Message::factory(40)->create();
     }
 }

@@ -19,8 +19,12 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'surname',
+        'nickname',
         'email',
         'password',
+        'birth_date',
+        'role_id'
     ];
 
     /**
@@ -32,6 +36,18 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+    public function roles(){
+        return $this->hasOne(Role::class);
+    }
+
+    public function parties(){
+        return $this->belongsToMany(Party::class);
+    }
+
+    public function messages(){
+        return $this->belongsToMany(Message::class);
+    }
 
     /**
      * The attributes that should be cast.
