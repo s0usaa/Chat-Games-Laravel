@@ -17,8 +17,9 @@ class AuthController extends Controller
         try{
             Log::info("Register User Working");
             $validator = Validator::make($request->all(),[
-                'name' => 'required|string',
-                'email' => 'required|string|unique:users,email',
+                'name' => 'required|string|regex:/^[a-zA-Z0-9 ]*$/|max:20',
+                'nickname' => 'required|string|unique:users,nickname|regex:/^[a-zA-Z0-9 ]*$/|max:20',
+                'email' => 'required|string|unique:users,email|max:40',
                 'password' => 'required|string|min:6|max:14',
             ]);
             
@@ -28,6 +29,7 @@ class AuthController extends Controller
 
             $user = User::create([
                 'name' => $request['name'],
+                'nickname' => $request['nickname'],
                 'email' => $request['email'],
                 'password' => bcrypt($request['password']),
                 'role_id' => 2,
