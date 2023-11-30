@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,22 +17,32 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 //AuthController
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
+
+//Is Admin
 Route::group([
     'middleware' => ['auth:sanctum', 'isAdmin']
 ],
 function(){
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::get('/profile', [AuthController::class, 'profile']);
 });
 
+//User Controller
+Route::group(['middleware' => 'auth:sanctum'], function(){
+    Route::get('/profile', [UserController::class, 'profile']);
+});
+
+
+
+//Direccion de Testeo
 Route::get('/wellcome', function(){
-    return view('wellcome');
+    return view('welcome');
 });

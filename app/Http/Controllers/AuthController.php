@@ -15,6 +15,7 @@ class AuthController extends Controller
     public function register(Request $request){
 
         try{
+            Log::info("Register User Working");
             $validator = Validator::make($request->all(),[
                 'name' => 'required|string',
                 'email' => 'required|string|unique:users,email',
@@ -56,6 +57,7 @@ class AuthController extends Controller
 
     public function login(Request $request){
         try {
+            Log::info("Login User Working");
             $validator = Validator::make($request->all(),[
                 'email' => 'required|string',
                 'password' => 'required|string'

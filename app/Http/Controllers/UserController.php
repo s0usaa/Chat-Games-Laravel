@@ -11,8 +11,8 @@ use Symfony\Component\HttpFoundation\Response;
 class UserController extends Controller
 {
     public function profile(){
+       try {
         $user  = auth()->user();
-
         return response([
             "success" => true,
             "message" => "Perfil de usuario aceptado",
@@ -20,6 +20,15 @@ class UserController extends Controller
         ],
         Response::HTTP_OK
     );
+       } catch (\Throwable $th) {
+        Log::error("Error al ver tu perfil: " . $th->getMessage());
+        return response()->json([
+            "success" => false,
+            "message" => "No puedes acceder a tu perfil"
+        ],
+        Response::HTTP_INTERNAL_SERVER_ERROR
+    );
+       } 
     }
 
     public function profileUpdate(Request $request){
