@@ -24,6 +24,7 @@ class User extends Authenticatable
         'email',
         'password',
         'age',
+        'role_id'
     ];
 
     /**
@@ -34,7 +35,6 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'role_id',
     ];
 
 
@@ -49,7 +49,7 @@ class User extends Authenticatable
     ];
 
     public function roles(){
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class);
     }
 
     public function parties(){
@@ -57,6 +57,10 @@ class User extends Authenticatable
     }
 
     public function messages(){
-        return $this->belongsToMany(Message::class);
+        return $this->hasMany(Message::class);
+    }
+
+    public function party_user(){
+        return $this->belongsToMany(Party::class);
     }
 }

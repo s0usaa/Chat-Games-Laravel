@@ -28,12 +28,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 //Is Admin
-Route::group([
-    'middleware' => ['auth:sanctum', 'isAdmin']
-],
-function(){
-    Route::post('/logout', [AuthController::class, 'logout']);
-});
 
 //User Controller
 Route::group(['middleware' => 'auth:sanctum'], function(){

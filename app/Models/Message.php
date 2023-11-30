@@ -10,10 +10,10 @@ class Message extends Model
     use HasFactory;
 
     public function parties(){
-        return $this->hasOne(Party::class);
+        return $this->belongsTo(Party::class);
     }
 
     public function users(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 }

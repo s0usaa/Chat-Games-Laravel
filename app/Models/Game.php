@@ -10,6 +10,6 @@ class Game extends Model
     use HasFactory;
 
     public function parties(){
-        return $this->hasOne(Party::class);
+        return $this->hasMany(Party::class);
     }
 }
