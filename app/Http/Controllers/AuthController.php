@@ -15,28 +15,22 @@ class AuthController extends Controller
     public function register(Request $request){
 
         try{
-            // Log::info("Register User Working");
-            // $validator = Validator::make($request->all(),[
-            //     'name' => 'required|string',
-            //     'email' => 'required|string|unique:users,email',
-            //     'password' => 'required|string|min:6|max:14',
-            // ]);
-
-            $request->validate([
-                'name' => 'required|string|max:20',
-                'email' => 'required|string|unique:users,email|max:40',
-                'password' => 'required|string|min:6'
+            Log::info("Register User Working");
+            $validator = Validator::make($request->all(),[
+                'name' => 'required|string',
+                'email' => 'required|string|unique:users,email',
+                'password' => 'required|string|min:6|max:14',
             ]);
             
-            // if($validator->fails()){
-            //     return response()->json($validator->errors(),400);
-            // }
+            if($validator->fails()){
+                return response()->json($validator->errors(),400);
+            }
 
             $user = User::create([
                 'name' => $request['name'],
                 'email' => $request['email'],
                 'password' => bcrypt($request['password']),
-                // 'role_id' => 2,
+                'role_id' => 2,
             ]);
 
             $token = $user->createToken('apiToken')->plainTextToken;
