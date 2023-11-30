@@ -40,15 +40,15 @@ class UserController extends Controller
             $id = auth()->user()->id;
             $id2 = DB::table('users')->where('id', '=', $id)->get();
 
-            $validator = Validator::make($request->all(),[
-                'name' => 'string|regex:/^[A-Za-z0-9]+$/|max:20',
-                'surname' => 'required|string|regex:/^[A-Za-z0-9]+$/|max:20',
-                'nickname' => 'string|unique:users,nickname|regex:/^[A-Za-z0-9]+$/|max:20',
-            ]);
+            // $validator = Validator::make($request->all(),[
+            //     'name' => 'string|regex:/^[A-Za-z0-9]+$/|max:20',
+            //     'surname' => 'required|string|regex:/^[A-Za-z0-9]+$/|max:20',
+            //     'nickname' => 'string|unique:users,nickname|regex:/^[A-Za-z0-9]+$/|max:20',
+            // ]);
 
-            if ($validator->fails()) {
-                return response()->json($validator->errors(),400);
-            }
+            // if ($validator->fails()) {
+            //     return response()->json($validator->errors(),400);
+            // }
 
             $user = User::find($id);
 
