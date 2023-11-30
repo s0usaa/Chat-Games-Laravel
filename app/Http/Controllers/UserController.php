@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Message;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 use function PHPUnit\Framework\isNull;
+use function PHPUnit\Framework\returnValue;
 
 class UserController extends Controller
 {
@@ -87,6 +89,33 @@ class UserController extends Controller
             ],
             500
         );
+        }
+    }
+
+    public function createComment(Request $request){
+        try {
+            $party_id = $request->input('party_id');
+            $userId = auth()->user()->id;
+            $comments = $request->input('comments');
+
+            $newMessage = new Message();
+            $newMessage->party_id = $party_id;
+            $newMessage->user_id = $userId;
+            $newMessage->comments = $comments;
+            $newMessage->save();
+
+            return response()->json([
+                "success" => true,
+                "message" => "Mensaje creado",
+                "data" => $newMessage
+            ],200);
+        } catch (\Throwable $th) {
+            Log::error("Error al crear el mensaje: " . $th->getMessage());
+
+            return response()->json([
+                "succes" => false,
+                "message" => "Error al crear el mensaje"
+            ],500);
         }
     }
 }
