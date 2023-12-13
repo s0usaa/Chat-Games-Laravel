@@ -186,4 +186,27 @@ class UserController extends Controller
             ],500);
         }
     }
+
+    public function usersDetailsById(Request $request, $id){
+        try {
+            $users = User::query()->find($id);
+            return response()->json([
+                "success" => true,
+                "message" => "Detalles de Usuario",
+                "data" => [
+                    "id" => $users->id,
+                    "name" => $users->name,
+                    "surname" => $users->surname,
+                    "nickname" => $users->nickname,
+                    "age" => $users->age,
+                    "email" => $users->email
+                ]
+                ],200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                "success" => false,
+                "message" => $th->getMessage()
+            ],500);
+        }
+    }
 }

@@ -28,8 +28,12 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 //Is Admin
-Route::middleware('auth:sanctum', 'isAdmin')->get('/users/all', [UserController::class, 'viewAllUsers']);
-Route::middleware('auth:sanctum', 'isAdmin')->delete('/users/delete/{id}', [UserController::class, 'deleteUserById']);
+Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function(){
+    Route::get('/users/all', [UserController::class, 'viewAllUsers']);
+    Route::delete('/users/delete/{id}', [UserController::class, 'deleteUserById']);
+    Route::get('/users/details/{id}', [UserController::class, 'usersDetailsById']);
+});
+
 
 //User Controller
 Route::group(['middleware' => 'auth:sanctum'], function(){
