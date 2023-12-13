@@ -118,4 +118,24 @@ class UserController extends Controller
             ],500);
         }
     }
+
+    public function viewMyMessages()
+    {
+        try {
+            $id = auth()->user()->id;
+            $message = DB::table('messages')->where('user_id', '=', $id)->get();
+            $message->save();
+
+            return response()->json([
+                "success" => true,
+                "message" => "Estos son sus mensajes" . $message,
+                "data" => $message
+            ],200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                "success" => false,
+                "message" => $th->getMessage() . $message
+            ],500);
+        }
+    }
 }
