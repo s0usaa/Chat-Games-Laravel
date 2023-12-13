@@ -154,4 +154,27 @@ class UserController extends Controller
             ],500);
         }
     }
+
+    public function deleteUserById(Request $request, $id){
+        try {
+            $user = User::find($id);
+            if($user->role_id != 1){
+                User::destroy($id);
+                return response()->json([
+                    "success" => true,
+                    "message" => "Usuario eliminado correctamente"
+                ],200);
+            }else{
+                return response()->json([
+                    "success" => false,
+                    "message" => "El perfil de admin no se puede borrar"
+                ],400);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                "success" => false,
+                "message" => $th->getMessage()
+            ],500);
+        }
+    }
 }
