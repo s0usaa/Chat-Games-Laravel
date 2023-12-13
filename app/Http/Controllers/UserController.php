@@ -313,4 +313,44 @@ class UserController extends Controller
             ], 500);
         }
     }
+
+    public function updateMessagesByIdUser(Request $request, $id){
+        try {
+            $validator = Validator::make($request->all(),[
+                "comments" => "string",
+                "party_id" => "integer"
+            ]);
+            if($validator->fails()){
+                return response()->json($validator->errors(),400);
+            }
+
+            $comments = $request->input("comments");
+            $party_id = $request->input("party_id");
+            $message = Message::find($id);
+            $myId = auth()->user()->id;
+            $user = User::find($myId);
+            if($user->id == $message->user_id){
+                $message->comments = $comments;
+                $message->party_id = $party_id;
+                $message->save();
+                return response()->json([
+                    "success" => true,
+                    "message" => "Mensaje actualizado correctamente",
+                    "data" => $message,
+                ],200);
+            }else{
+                return response()->json([
+                    "success" => true,
+                    "message" => "No puedes actualizar el mensaje de otros usuarios"
+                ]);
+            }
+        } catch (\Throwable $th) {
+            Log::error("Delete Message By Id User error: " . $th->getMessage());
+            return response()->json([
+                "success" => false,
+                "message" => "Error al borrar el mensaje " . ($message)
+            ],
+            Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
