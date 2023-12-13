@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::put('/profile/update', [UserController::class, 'profileUpdate']);
     Route::post('/comments/create', [UserController::class, 'createComment']);
     Route::get('/comments/view',[UserController::class, 'viewMyMessages']);
+    Route::get('/comments/party/{id}',[UserController::class, 'viewMessagesPartyById']);
 });
 
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Message;
+use App\Models\Party;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -242,6 +244,32 @@ class UserController extends Controller
                 "message" => "Error al actualizar el mensaje " . ($message)
             ],
             Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public function viewMessagesPartyById($id){
+        try {
+            $message = DB::table('messages')->where("party_id", "=", $id)->get();
+            $party = Party::query()->find($id);
+            $gameId = $party->game_id;
+            $partyName = $party->name;
+            $gameId = $party->game_id;
+            $gameData = Game::query()->find($gameId);
+            $gameTitle = $gameData->title;
+
+            return response()->json([
+                "success" => true,
+                "message" => "Mensajes del Id del Juego",
+                "data" => [
+                    "Titulo del Juego" => $gameTitle,
+                    "Mensaje" => $message
+                ]
+                ],200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                "success" => false,
+                "message" => $th->getMessage() . $message
+            ], 500);
         }
     }
 }
