@@ -209,4 +209,39 @@ class UserController extends Controller
             ],500);
         }
     }
+
+    public function updateMessagesByIdAdmin(Request $request, $id){
+        try {
+            $validator = Validator::make($request->all(),[
+                "comments" => "string",
+                "party_id" => "integer",
+            ]);
+            if($validator->fails()){
+                return response()->json($validator->errors(),400);
+            }
+
+            $comments = $request->input("comments");
+            $party_id = $request->input("party_id");
+            $message = Message::find($id);
+
+            if(isNull($comments, $party_id)){
+                $message->comments = $comments;
+                $message->party_id = $party_id;
+            }
+
+            $message->save();
+            return response()->json([
+                "success" => true,
+                "message" => "Mensaje actualiado correctamente",
+                "data" => $message
+            ],200);
+        } catch (\Throwable $th) {
+            Log::error("Update Profile error " . $th->getMessage());
+            return response()->json([
+                "success" => false,
+                "message" => "Error al actualizar el mensaje " . ($message)
+            ],
+            Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
 }
