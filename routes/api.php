@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('/comments/create', [UserController::class, 'createComment']);
     Route::get('/comments/view',[UserController::class, 'viewMyMessages']);
     Route::get('/comments/party/{id}',[UserController::class, 'viewMessagesPartyById']);
+    Route::delete('/mycomments/delete/{id}',[UserController::class, 'deleteCommentByIdUser']);
 });
 
 

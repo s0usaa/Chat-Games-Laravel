@@ -288,4 +288,29 @@ class UserController extends Controller
             ],500);
         }
     }
+
+    public function deleteCommentByIdUser(Request $request, $id){
+        try {
+            $myId = auth()->user()->id;
+            $user = User::find($myId);
+            $party = Message::find($id);
+            if($user->id == $party->user_id){
+                Message::where('id', $id)->delete();
+                return response()->json([
+                    "success" => true,
+                    "message" => "Mensaje borrado correctamente",
+                ],200);
+            }else{
+                return response()->json([
+                    "success" => true,
+                    "message" => "No puedes borrar mensajes de otros usuarios " . $user,
+                ],400);
+            }
+        } catch (\Throwable $th) {
+            return response()->json([
+                "success" => false,
+                "message" => $th->getMessage() . $party
+            ], 500);
+        }
+    }
 }

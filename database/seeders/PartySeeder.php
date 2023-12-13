@@ -17,22 +17,26 @@ class PartySeeder extends Seeder
             [
                 'id' => 1,
                 'name' => "Deportes",
-                'rules' => "No insultar"
+                'rules' => "No insultar",
+                'game_id' => 6,
             ],
             [
                 'id' => 2,
                 'name' => "Shooters",
-                'rules' => "Prohivido el fuego amigo"
+                'rules' => "Prohivido el fuego amigo",
+                'game_id' => 1,
             ],
             [
                 'id' => 3,
                 'name' => "Accion",
-                'rules' => "No spoilear historias"
+                'rules' => "No spoilear historias",
+                'game_id' => 3,
             ],
             [
                 'id' => 4,
                 'name' => "SoulsLike",
-                'rules' => "Maximo 10 trys por Boss"
+                'rules' => "Maximo 10 trys por Boss",
+                'game_id' => 2,
             ],
             ]);
     }
