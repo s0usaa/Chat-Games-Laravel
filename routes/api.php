@@ -34,6 +34,7 @@ Route::group(['middleware' => ['auth:sanctum', 'isAdmin']], function(){
     Route::get('/users/details/{id}', [UserController::class, 'usersDetailsById']);
     Route::put('/comments/update/{id}', [UserController::class, 'updateMessagesByIdAdmin']);
     Route::delete('/comments/delete/{id}', [UserController::class, 'deleteCommentByIdAdmin']);
+    Route::post('/party/create', [UserController::class, 'createParty']);
 });
 
 
