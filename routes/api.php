@@ -28,12 +28,14 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:sanctum')->post('/logout', [AuthController::class, 'logout']);
 
 //Is Admin
+Route::middleware('auth:sanctum', 'isAdmin')->get('/users/all', [UserController::class, 'viewAllUsers']);
 
 //User Controller
 Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::get('/profile', [UserController::class, 'profile']);
     Route::put('/profile/update', [UserController::class, 'profileUpdate']);
     Route::post('/comments/create', [UserController::class, 'createComment']);
+    Route::get('/comments/view',[UserController::class, 'viewMyMessages']);
 });
 
 
