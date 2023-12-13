@@ -94,8 +94,18 @@ class UserController extends Controller
 
     public function createComment(Request $request){
         try {
-            $party_id = $request->input('party_id');
+
+            $validator = Validator::make($request->all(),[
+                "comments" => "string",
+                "party_id" => "integer",
+            ]);
+
+            if($validator->fails()){
+                return response()->json($validator->errors(),400);
+            }
+
             $userId = auth()->user()->id;
+            $party_id = $request->input('party_id');
             $comments = $request->input('comments');
 
             $newMessage = new Message();
@@ -124,7 +134,6 @@ class UserController extends Controller
         try {
             $id = auth()->user()->id;
             $message = DB::table('messages')->where('user_id', '=', $id)->get();
-            $message->save();
 
             return response()->json([
                 "success" => true,
