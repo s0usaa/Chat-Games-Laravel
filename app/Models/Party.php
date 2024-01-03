@@ -25,8 +25,8 @@ class Party extends Model
         return $this->belongsToMany(Party::class);
     }
     
-    public function reviews(){
-        return $this->hasMany(Party_Users::class);
-    }
+    // public function reviews(){
+    //     return $this->hasMany(Party_User::class);
+    // }
 
 }

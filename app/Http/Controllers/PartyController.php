@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
 use App\Models\Party;
 use Dotenv\Repository\RepositoryInterface;
 use Illuminate\Http\Request;
@@ -33,6 +34,31 @@ class PartyController extends Controller
                 "success" => false,
                 "message" => "Error al crear una party" . $newParty
             ],500);
+        }
+    }
+
+    public function getPartyById(Request $request, $id){
+        try {
+            $party = Party::query()->find($id);
+            $gameId = $party->game_id;
+            $gameData = Game::query()->find($gameId);
+            $gameTitle = $gameData->title;
+            return response()->json([
+                "success" => true,
+                "message" => "Detalle de la Party",
+                "data" => [
+                    "id" => $party->id,
+                    "name" => $party->name,
+                    "rules" => $party->rules,
+                    "Title of Game" => $gameTitle,
+                    "game_id" => $party->game_id
+                ]
+                ],200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                "success" => false,
+                "message" => $th->getMessage()
+            ], 500);
         }
     }
 }
