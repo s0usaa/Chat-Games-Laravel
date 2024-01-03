@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::delete('/mycomments/delete/{id}',[UserController::class, 'deleteCommentByIdUser']);
     Route::put('/mycomments/update/{id}',[UserController::class, 'updateMessagesByIdUser']);
     Route::post('/party/join',[PartyController::class, 'joinParty']);
+    Route::delete('/party/leave/{id}',[PartyController::class, 'leaveParty']);
 });
 
 
